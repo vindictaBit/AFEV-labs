@@ -1,0 +1,13 @@
+class MyClass
+types
+    public MyType = nat;
+    
+instance variables
+    private myVar: MyType := 0;
+    
+operations
+    public MyOperation: MyType ==> MyType
+    MyOperation(x) == 
+        return x * 2;
+        
+end MyClass

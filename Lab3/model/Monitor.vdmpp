@@ -1,0 +1,40 @@
+class Monitor
+
+instance variables
+  private temps: seq of nat;
+  private alarm: bool;
+
+inv len temps = 5;
+
+operations
+  public Monitor: seq of nat * bool ==> Monitor
+  Monitor(temperaturas, alarma) ==
+    (temps := temperaturas;
+     alarm := alarma;);
+
+  public Rising: () ==> bool
+  Rising() ==
+    (alarm := temps(1) < temps(5);
+     return alarm);
+
+  -- Verifica si alguna de las lecturas en la muestra excede los 400°C
+  public OverLimit: () ==> bool
+  OverLimit() ==
+    (dcl i: nat1 := 1;
+     while i <= len temps do
+       if temps(i) > 400 then
+         return true;
+       i := i + 1;
+     return false);
+
+  -- Verifica si todas las lecturas en la muestra exceden los 400°C
+  public ContinuamenteOverLimit: () ==> bool
+  ContinuamenteOverLimit() ==
+    (dcl i: nat1 := 1;
+     while i <= len temps do
+       if temps(i) <= 400 then
+         return false;
+       i := i + 1;
+     return true);
+
+end Monitor
