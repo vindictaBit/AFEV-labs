@@ -1,0 +1,70 @@
+class Monitor2
+
+instance variables
+  private temps: seq of nat;
+  private alarm: bool;
+
+inv len temps = 5
+
+operations
+  public Monitor2: seq of nat * bool ==> Monitor2
+  Monitor2(t, a) ==
+  (
+    temps := t;
+    alarm := a
+  );
+
+  public Rising: () ==> bool
+  Rising() ==
+  (
+    alarm := temps(1) < temps(5);
+    return alarm
+  );
+
+  public OverLimitV1: () ==> bool
+  OverLimitV1() ==
+  (
+    alarm := temps(1) > 400 or temps(2) > 400 or temps(3) > 400 or temps(4) > 400 or temps(5) > 400;
+    return alarm
+  );
+
+  public OverLimitV2: () ==> bool
+  OverLimitV2() ==
+  (
+    alarm := exists i in set inds temps & temps(i) > 400;
+    return alarm
+  );
+
+  public ContinueOverLimitV1: () ==> bool
+  ContinueOverLimitV1() ==
+  (
+    alarm := temps(1) > 400 and temps(2) > 400 and temps(3) > 400 and temps(4) > 400 and temps(5) > 400;
+    return alarm
+  );
+  
+  public ContinueOverLimitV2: () ==> bool
+  ContinueOverLimitV2() ==
+  (
+    alarm := forall i in set inds temps & temps(i) > 400;
+    return alarm
+  );
+  
+  public TodasEnRango: () ==> bool
+  TodasEnRango() ==
+  (
+	return forall t in set elems temps & t > 50 and t < 400;
+  );
+  
+  public MayorEn10: () ==> bool
+  MayorEn10() ==
+  (
+	return forall i in set inds temps & i > 1 => temps(i) > temps(i - 1) + 10;
+  );
+  
+  public DosMayores: () ==> bool
+  DosMayores() ==
+  (
+	return exists i, j in set inds temps & i <> j and temps(i) > 400 and temps(j) > 400;
+  )
+
+end Monitor2

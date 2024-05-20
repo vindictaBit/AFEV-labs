@@ -1,0 +1,28 @@
+/**
+  Monitor.vpp.
+
+  <p>
+  description
+  </p>
+
+  @version
+  @author
+*/
+
+class Monitor.vpp
+
+types
+
+values
+
+instance variables
+
+operations
+
+-- constructor for Monitor.vpp
+public Monitor.vpp: () ==> Monitor.vpp
+Monitor.vpp() == ();
+
+functions
+
+end Monitor.vpp

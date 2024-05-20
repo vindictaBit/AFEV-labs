@@ -1,0 +1,20 @@
+class Monitor
+
+instance variables
+private temps:seq of nat;
+private alarm:bool;
+
+inv len temps =5
+
+operations
+public Monitor:seq of nat * bool ==> Monitor
+Monitor(temperaturas.alarma) ==(temps:=temperaturas:alarm:=alarma;);
+
+public Rising:() ==> bool
+Rising() ==
+(alarm:=temps(1) <temps(5):
+retum alarm )
+
+end Monitor
+
+
